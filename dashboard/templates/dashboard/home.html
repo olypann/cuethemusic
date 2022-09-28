@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="../../static/dashboard/style.css">
+    
+</head>
+<body>
+    <div class="container">
+
+        {{ user }}
+        {{ user_id }}
+        
+
+        <!-- {{ user.user.id }} -->
+
+        <div class="topbar">
+            <a href="/login" class="topbar__btn game_btn dashboard__btn">Logout!</a>
+        </div>
+
+        <main class="dashboard">
+            <div class="dashboard__title">TITLE</div>
+
+            <div class="dashboard__columns">
+                
+                
+                <div class="dashboard__game_list">
+                    <ul class="game_list">
+                        <li class="game_item">...</li>
+                    </ul>
+
+                    <ul>
+                        {% if active_games %}
+                            {% for game in active_games %} 
+                                <li><p class="open_game" id="open_game--{{ game_id }}">
+                                <!-- {{ game.get_status_display }}</p></li> -->
+                            {% endfor %}
+                        {% endif%}
+
+                        {% if completed_games %}
+                            {% for game in completed_games %} 
+                                <li><p class="join_game" id="join_game--{{ game_id }}"></p></li>
+                            {% endfor %}
+                        {% endif%}
+            
+                        {% if not waiting_games and not active_games %}
+                            <p>No games yet!</p>
+                            <p>Create a new one to play :)</p>
+                        {% endif%}
+                            
+                        </ul>
+                </div>
+                
+
+                <div class="dashboard__new_game">
+                    <div id="new_game_btn" class="game_btn dashboard__btn">New Game!</div>
+                </div>
+    
+            </div>
+
+        </main>
+
+
+
+
+    <script>
+        document.querySelector('#new_game_btn').onclick = function(e) {
+                console.log('it works')
+                var data = new FormData();
+                console.log('{{user_id}}')
+                // console.log('{{user.user_id}}')
+
+                data.append('user_id', parseInt('{{user_id}}'));
+                fetch('/api/game/', {
+                    method: 'POST',
+                    headers: {
+                      'X-CSRFToken': '{{csrf_token}}',
+                    },
+                    body: data,
+                    credentials: "same-origin",
+                }).then(res=>{
+                    res.json().then(data=>{
+                        window.location.replace('/game/' + data.id);
+                    });
+                    
+                });
+    
+            };
+        
+    
+           
+
+
+        // document.querySelectorAll('.join_game').forEach(function(join_game) {
+        //     join_game.onclick = function(e) {
+        //     console.log(e.target.id.split('--')[1], '{{ user_id }}');
+
+        //     var data = new FormData();
+        //     data.append('user_id', '{{user_id}}');
+        //     fetch('/api/game/' + e.target.id.split('--')[1] + '/', {
+        //         method: 'PUT',
+        //         headers: {
+        //         'X-CSRFToken': '{{csrf_token}}',
+        //         },
+        //         body: data,
+        //         credentials: "same-origin",
+        //     }).then(res=>{
+        //         res.json().then(data=>{
+                    
+        //             window.location.replace('/game/' + data.id);
+        //         });
+                
+        //     });
+            
+        //     }
+        // })
+
+    </script>
+
+
+        
+
+
+
+
+    </div>
+</body>
+</html>
