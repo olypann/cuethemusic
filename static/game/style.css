@@ -1,0 +1,254 @@
+* {
+    font-family: 'Press Start 2P';
+    color: var(--light_color);
+}
+
+body {
+    background: var(--solid_color);
+
+}
+
+.container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+
+
+.game__task-text {
+    text-align: center;
+    font-size: 20px;
+    color: var(--light_color);
+}
+
+.game__task-category,
+.game__task-letter {
+    color: var(--double_accent_color);
+}
+
+.game__countdown-text {
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+
+.game__countdown-number {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--double_accent_color);
+}
+
+.game__left,
+.game__right {
+    box-sizing: border-box;
+    width: 420px;
+    float: left;
+    padding: 20px;
+
+    border-width: 4px 3px 10px 10px;
+    border-style: solid;
+    border-top-color: var(--light_color);
+    border-right-color: var(--accent_color);
+    border-bottom-color: var(--accent_color);
+    border-left-color: var(--light_color);
+}
+
+.game__left {
+    margin-right: 60px;
+    border-radius: 20px;
+}
+
+.game__right {
+    border: 1px solid var(--accent_color);
+    border-radius: 20px;
+    background: var(--button_color);
+    border-width: 4px 3px 10px 10px;
+    border-style: solid;
+    border-top-color: var(--light_color);
+    border-right-color: var(--accent_color);
+    border-bottom-color: var(--accent_color);
+    border-left-color: var(--light_color);
+}
+
+.game__user {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent_color);
+    margin-top: 10px;
+}
+
+.game__list {
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    list-style: none;
+    resize: none;
+    margin-bottom: 24px;
+    margin-right: 24px;
+    height: 150px;
+    width: 90%;
+    overflow-y: scroll;
+    border-width: 4px 3px 10px 10px;
+    border-style: solid;
+    border-top-color: var(--light_color);
+    border-right-color: var(--accent_color);
+    border-bottom-color: var(--accent_color);
+    border-left-color: var(--light_color);
+    background: transparent;
+
+    line-height: 20px;
+    font-size: 14px;
+    
+}
+
+
+
+.game__right .game__list {
+    margin-bottom: 54px;
+}
+
+.game__item {
+    margin-bottom: 10px;
+}
+
+.game__close {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.game__close-btn {
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.game__close-btn::before {
+    position: absolute;
+    top: 4px;
+    right: 25px;
+    content: '';
+    display: block;
+    width: 2px;
+    height: 40px;
+    background: var(--double_accent_color);
+    transform: rotate(45deg);
+    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.game__close-btn::after {
+    position: absolute;
+    top: 4px;
+    right: 25px;
+    content: '';
+    display: block;
+    width: 2px;
+    height: 40px;
+    background: var(--double_accent_color);
+    transform: rotate(-45deg);
+    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.game__close-btn:hover::before {
+    transform: rotate(225deg);
+}
+
+.game__close-btn:hover::after {
+    transform: rotate(135deg);
+}
+
+.game__close-btn:active {
+    color: var(--double_accent_color);
+}
+
+.game__close-btn:hover,
+.game__close-btn:active,
+.game__close-btn:focus {
+    border-color: var(--accent_color);
+    cursor: pointer;
+    box-shadow: none;
+    outline: none;
+}
+
+.game_btn {
+    width: 60px;
+    height: 32px;
+    display: inline-block;
+    padding: 20px 36px;
+
+    background-color: var(--button_color);
+    border-width: 4px 3px 10px 10px;
+    border-top-color: var(--light_color);
+    border-right-color: var(--accent_color);
+    border-bottom-color: var(--accent_color);
+    border-left-color: var(--light_color);
+
+    text-decoration: none;
+    color: var(--light_color);
+    font-size: 16px;
+
+    transition: 0.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+.game_btn:hover {
+    transform: scale(0.95);
+    cursor: pointer;
+    box-shadow: 0 10px 20px var(--shadow_color);
+}
+
+.game_btn:focus {
+    outline: none;
+}
+
+.game__send-btn:hover,
+.game__send-btn:active,
+.game__send-btn:focus {
+    /* border: none; */
+    cursor: pointer;
+    outline: none;
+}
+
+
+.game__input-word {
+    height: 30px;
+    width: 290px;
+    font-size: 10px;
+
+    margin-right: 10px;
+    color: var(--light_color);
+
+    border-width: 4px 3px 10px 10px;
+    border-style: solid;
+    border-top-color: var(--light_color);
+    border-right-color: var(--accent_color);
+    border-bottom-color: var(--accent_color);
+    border-left-color: var(--light_color);
+}
+
+.game__input-word:focus-visible {
+    outline: none;
+}
+
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--shadow_color);
+    border-radius: 10px;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--solid_color);
+    border-radius: 10px;
+    height: 10px;
+}
+

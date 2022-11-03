@@ -12,7 +12,6 @@ from django.contrib import messages
 def choice_view(request):
     return render(request, 'accounts/choice.html')
 
-
 def signup_view(request):
     form = UserCreationForm()
     if request.method == 'POST':

@@ -1,51 +1,59 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
 
-    <link rel="stylesheet" href="../../static/dashboard/style.css">
+    {% comment %} <link rel="stylesheet" href="../../static/dashboard/style.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/title.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/colors.css' %}">
+    <link rel="shortcut icon" type="image/png" href="../../static/dashboard/images/ball_favicon.ico"/>
     
 </head>
 <body>
     <div class="container">
 
-        {{ user }}
-        {{ user_id }}
-        
-
-        <!-- {{ user.user.id }} -->
-
         <div class="topbar">
-            <a href="/login" class="topbar__btn game_btn dashboard__btn">Logout!</a>
+            <a href="/login" class="topbar__btn game_btn">Logout!</a>
         </div>
 
         <main class="dashboard">
-            <div class="dashboard__title">TITLE</div>
+            <div class="dashboard__title">
+                <h1>
+                    8-Ball Game
+                </h1>
+                <h1 class="small_text">
+                    made by Olesya Panyushkina
+                </h1>
+            </div>
 
             <div class="dashboard__columns">
                 
                 
                 <div class="dashboard__game_list">
-                    <ul class="game_list">
-                        <li class="game_item">...</li>
-                    </ul>
 
                     <ul>
                         {% if active_games %}
                             {% for game in active_games %} 
-                                <li><p class="open_game" id="open_game--{{ game_id }}">
-                                <!-- {{ game.get_status_display }}</p></li> -->
+                                <li><p class="open_game" id="join_game--{{ game.id }}">Game number {{ game.id }}, {{ game.get_status_display }}</p></li>
                             {% endfor %}
                         {% endif%}
 
-                        {% if completed_games %}
-                            {% for game in completed_games %} 
-                                <li><p class="join_game" id="join_game--{{ game_id }}"></p></li>
+                        {% if won_games %}
+                            {% for game in won_games %} 
+                                Game number {{ game.id }}, {{ game.get_status_display }}
+                            {% endfor %}
+                        {% endif%}
+
+                        {% if defeated_games %}
+                            {% for game in defeated_games %} 
+                                Game number {{ game.id }}, {{ game.get_status_display }}
                             {% endfor %}
                         {% endif%}
             
-                        {% if not waiting_games and not active_games %}
+                        {% if not active_games and not won_games and not defeated_games %}
                             <p>No games yet!</p>
                             <p>Create a new one to play :)</p>
                         {% endif%}
@@ -55,17 +63,75 @@
                 
 
                 <div class="dashboard__new_game">
-                    <div id="new_game_btn" class="game_btn dashboard__btn">New Game!</div>
+                    <div id="new_game_btn" class="new_game_btn dashboard__btn game_btn ">New Game!</div>
                 </div>
     
             </div>
 
+        
+
         </main>
+
+        <div class="toggle-container">
+            <button class="dashboard__btn game_btn theme-btn light" onclick="setTheme('light')" title="Light mode">Light Mode</button>
+            <button class="dashboard__btn game_btn theme-btn dark" onclick="setTheme('dark')" title="Dark mode">Dark Mode</button>
+        </div>
+
+
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <defs>
+        
+              <filter id="squiggly-0">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="0"/>
+                <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="4" />
+              </filter>
+              <filter id="squiggly-1">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="1"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+              </filter>
+              
+              <filter id="squiggly-2">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="2"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" />
+              </filter>
+              <filter id="squiggly-3">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="3"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+              </filter>
+              
+              <filter id="squiggly-4">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="4"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" />
+              </filter>
+            </defs> 
+        </svg>
+
+
+
+    </div>
 
 
 
 
     <script>
+        const setTheme = theme => {
+            document.documentElement.className = theme;
+            localStorage.setItem('theme', theme);
+        };
+
+        window.addEventListener('load', (event) => {
+            website_theme = localStorage.getItem('theme')
+            console.log(website_theme)
+            if (!website_theme) {
+                console.log("default theme")
+                localStorage.setItem('theme', 'light');
+                website_theme = 'light'
+            }
+
+            setTheme(website_theme)
+        });
+
+
         document.querySelector('#new_game_btn').onclick = function(e) {
                 console.log('it works')
                 var data = new FormData();
@@ -93,29 +159,37 @@
            
 
 
-        // document.querySelectorAll('.join_game').forEach(function(join_game) {
-        //     join_game.onclick = function(e) {
-        //     console.log(e.target.id.split('--')[1], '{{ user_id }}');
+        document.querySelectorAll('.open_game').forEach(function(open_game) {
+            open_game.onclick = function(e) {
+            console.log(e.target.id.split('--')[1], '{{ user_id }}');
+            window.location.replace('/game/' + e.target.id.split('--')[1]);
+            }
+        })
 
-        //     var data = new FormData();
-        //     data.append('user_id', '{{user_id}}');
-        //     fetch('/api/game/' + e.target.id.split('--')[1] + '/', {
-        //         method: 'PUT',
-        //         headers: {
-        //         'X-CSRFToken': '{{csrf_token}}',
-        //         },
-        //         body: data,
-        //         credentials: "same-origin",
-        //     }).then(res=>{
-        //         res.json().then(data=>{
+
+        document.querySelectorAll('.join_game').forEach(function(join_game) {
+            join_game.onclick = function(e) {
+            console.log(e.target.id.split('--')[1], '{{ user_id }}');
+
+            var data = new FormData();
+            data.append('user_id', '{{user_id}}');
+            fetch('/api/game/' + e.target.id.split('--')[1] + '/', {
+                method: 'PUT',
+                headers: {
+                'X-CSRFToken': '{{csrf_token}}',
+                },
+                body: data,
+                credentials: "same-origin",
+            }).then(res=>{
+                res.json().then(data=>{
                     
-        //             window.location.replace('/game/' + data.id);
-        //         });
+                    window.location.replace('/game/' + data.id);
+                });
                 
-        //     });
+            });
             
-        //     }
-        // })
+            }
+        })
 
     </script>
 

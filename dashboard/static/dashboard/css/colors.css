@@ -1,0 +1,21 @@
+:root,
+
+    :root.light {
+        --light_color: #222323;
+        --solid_color: #f0f6f0;
+        --accent_color: #e31c19;
+        --double_accent_color: #222323;
+        --shadow_color: #96afb3;
+        --really_dark_color: #f0a23c;
+        --button_color: #d3e2e3;
+    }
+
+    :root.dark {
+        --light_color: #f0f6f0;
+        --solid_color: #222323;
+        --accent_color: #e31c19;
+        --double_accent_color: #c4ecec;
+        --shadow_color: #131313;
+        --really_dark_color: #f0a23c;
+        --button_color: #3b3c3c;
+    }

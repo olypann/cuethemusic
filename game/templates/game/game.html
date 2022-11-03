@@ -1,3 +1,4 @@
+{% load static %}
 
 <!DOCTYPE html>
 <html>
@@ -7,35 +8,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- <meta http-equiv="content-type" content="text/html; charset=UTF8"> -->
-    <title>Cue the music</title>
+    <title>Stick the music</title>
 
-    <!-- <link rel="stylesheet" type="text/css" href="css/game-layout.css"/>
-    <link rel="shortcut icon" type="image/png" href="assets/sprites/favicon.png"/> -->
+    <link rel="stylesheet" href="{% static 'game/css/colors.css' %}">
+    <link rel="stylesheet" href="{% static 'game/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'game/css/style.css' %}">
+
+    <link rel="shortcut icon" type="image/png" href="../../static/game/images/ball_favicon.ico"/>
 
 </head>
 
 <!-- <body style = "background-color:green"> -->
 <body>
-    Success!!!!!!!!!!!!!!!!!!!!!!!!
-    
-    <!-- hello world! -->
-    <!-- <canvas id="screen" width="1500" height="1000" ></canvas>
+    <div class="container">
+        <article class="game">
+            <div class="game__top-bar">
+                <div class="game__close">
+                    <a href="/dashboard/"><button class="game__close-btn">Close</button></a>
+                </div>
+                {% comment %} <div class="game__task">
+                    <h1 class="game__task-text">Remember as many <span class="game__task-category">{{ game.task.category.name }}</span> staring with <span class="game__task-letter">{{ game.task.letter }}</span></h1>
+                </div> {% endcomment %}
+                <div class="game__instance">
+                    <h1 class="game__instance-text">It is your turn</h1>
+                </div>
+                <div class="game__error">
+                    <h1 class="game__error-text"></h1>
+                </div>
+            </div>
 
+
+        </article>
+    </div>
+    <embed name="game_music" id="myAudio" src="../../static/game/music/morning.mp3" loop="True" hidden="true" autostart="true" preload="none" volume="50%">
+    
+    <canvas id="screen" width="1500" height="1000" ></canvas>
     <script src="../../static/game/js/Canvas.js"></script>
-    <script src="../../static/game/js/Game.js"></script>
-    <script src="../../static/game/js/GameWorld.js"></script>
+    <script src="../../static/game/js/Main.js"></script>
+    <script src="../../static/game/js/GameFunction.js"></script>
     <script src="../../static/game/js/Assets.js"></script>
     <script src="../../static/game/js/Color.js"></script>
     <script src="../../static/game/js/Stick.js"></script>
-    <script src="../../static/game/js/Vector2.js"></script>
-    <script src="../../static/game/js/input/ButtonState.js"></script>
+    <script src="../../static/game/js/Direction.js"></script>
+    <script src="../../static/game/js/input/Button.js"></script>
     <script src="../../static/game/js/input/Mouse.js"></script>
     <script src="../../static/game/js/Ball.js"></script>
+    <script src="../../static/game/js/Constants.js"></script>
+    <script src="../../static/game/js/Rules.js"></script>
+    <script src="../../static/game/js/Opponent.js"></script>
+    <script src="../../static/game/js/Player.js"></script>
 
     <script>
         loadAssets(PoolGame.start);
-
-    </script> -->
+    </script>
 
 </body>
 </html>
